@@ -2,6 +2,13 @@ MIT License
 
 Copyright (c) 2026 MyTelescope
 
+Scope: This license applies ONLY to the contents of this repository (the
+documentation, the server.json manifest, example configuration snippets, and
+related files). It does NOT grant any right to use, access, or redistribute
+the MyTelescope hosted service, its APIs, its data, or the MyTelescope brand
+and trademarks. Use of the MyTelescope service is a paid SaaS offering
+governed by a separate Terms of Service available at https://mytelescope.io.
+
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
 in the Software without restriction, including without limitation the rights
