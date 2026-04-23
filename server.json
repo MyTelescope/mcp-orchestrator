@@ -1,6 +1,6 @@
 {
   "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
-  "name": "io.github.mytelescope/mytelescope",
+  "name": "io.github.MyTelescope/mytelescope",
   "title": "MyTelescope",
   "description": "MyTelescope demand intelligence: signals, forecasts, competitor share, and emerging trends.",
   "version": "0.1.0",
