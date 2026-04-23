@@ -33,38 +33,11 @@ The server uses **OAuth 2.1 with PKCE** backed by Firebase. You do **not** need 
 
 ## Client setup
 
-MCP clients fall into two groups:
+The universal way to install MyTelescope into any MCP client is the [`mcp-remote`](https://www.npmjs.com/package/mcp-remote) bridge, which is run on-the-fly via `npx`. It works with Claude Desktop, Claude Code, Cursor, Windsurf, and any other client that speaks stdio MCP. It also handles the OAuth login in your browser and caches your token locally.
 
-- **Native remote support** — the client speaks streamable-HTTP directly.
-- **Stdio-only** — the client only launches local processes; use `npx mcp-remote` as a bridge.
+Requires Node.js 18+.
 
-Both paths trigger the same browser-based login on first use.
-
-### Option A — native remote (Claude Code, Cursor, recent Claude Desktop)
-
-Claude Code CLI:
-
-```bash
-claude mcp add --transport http mytelescope \
-  https://mytelescope-orchestrator-mcp-amjjfcdvoa-uc.a.run.app/mcp
-```
-
-Claude Desktop / Cursor config:
-
-```json
-{
-  "mcpServers": {
-    "mytelescope": {
-      "url": "https://mytelescope-orchestrator-mcp-amjjfcdvoa-uc.a.run.app/mcp",
-      "transport": "streamable-http"
-    }
-  }
-}
-```
-
-### Option B — stdio bridge via `npx mcp-remote`
-
-For clients that don't yet support remote transport natively, use [`mcp-remote`](https://www.npmjs.com/package/mcp-remote). It's an npm package run on the fly with `npx` — no install step, and it handles OAuth + token caching for you. Requires Node.js 18+.
+### Claude Desktop (`claude_desktop_config.json`)
 
 ```json
 {
@@ -81,7 +54,36 @@ For clients that don't yet support remote transport natively, use [`mcp-remote`]
 }
 ```
 
-On first launch, `mcp-remote` opens your browser for the MyTelescope login, then caches the token under `~/.mcp-auth/` so future launches are silent until the token expires.
+### Claude Code (CLI)
+
+```bash
+claude mcp add --transport http mytelescope \
+  https://mytelescope-orchestrator-mcp-amjjfcdvoa-uc.a.run.app/mcp
+```
+
+If your version of Claude Code doesn't support `--transport http` yet, use the same `npx mcp-remote` config as Claude Desktop above.
+
+### Cursor (`~/.cursor/mcp.json`)
+
+Cursor supports remote servers directly — no `mcp-remote` bridge needed:
+
+```json
+{
+  "mcpServers": {
+    "mytelescope": {
+      "url": "https://mytelescope-orchestrator-mcp-amjjfcdvoa-uc.a.run.app/mcp"
+    }
+  }
+}
+```
+
+### Windsurf / other stdio-only clients
+
+Use the same `npx mcp-remote` snippet shown for Claude Desktop.
+
+### First-run login
+
+On first connection, `mcp-remote` (or the client's native OAuth flow) opens your browser at MyTelescope's hosted login page. Sign in with your MyTelescope account; the token is cached locally under `~/.mcp-auth/` so subsequent launches are silent until the token expires.
 
 ## Registry
 
